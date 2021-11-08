@@ -1,5 +1,5 @@
 import {useContext, useState} from "react";
-import {GlobalContext} from "./GlobalContext/GlobalContextProvider";
+import {GlobalContext} from "../page-components/GlobalContext/GlobalContextProvider";
 
 export default function AddStudent(){
 
@@ -8,13 +8,16 @@ export default function AddStudent(){
 
     const [updated,setUpdated] = useContext(GlobalContext);
 
+    const url = process.env.NEXT_PUBLIC_BACKEND_SERVER+`/student`;
+
+
     const submitHandler = async (e) =>{
         e.preventDefault();
         if(name.length===0||email.length===0){
             console.log("Name and Email must be non-empty");
         }
         else{
-            fetch(`http://127.0.0.1:8080/student`, {
+            fetch(url, {
                 method: 'POST',
                 body: JSON.stringify({
                     name,

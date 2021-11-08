@@ -1,35 +1,17 @@
 import AddStudent from "./AddStudent";
 import ListStudent from "./ListStudent";
-import {useState} from "react";
+import ViewStudent from "../page-components/student-components/ViewStudent";
+import Login from "./login";
+import {RouteGuard} from "../page-components/authentication/RouterGuard";
 
-export default function Home(options) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+import {Router} from "next/router";
+import {useEffect} from "react";
 
-    async function submitHandler(e) {
-        await fetch(`http://127.0.0.1:8080/student`, {
-            method: 'POST',
-            body: JSON.stringify({
-                name,
-                email
-            }),
-            headers: { 'Content-Type': 'application/json'}
+export default function Home() {
 
-        });
-
-    }
-
-    function getHandler(e) {
-        fetch(`http://localhost:8080/getStudent`)
-            .then(res => res.json())
-            .then(() => console.log());
-
-    }
-
-    return(
-        <div className="w-screen">
-            <AddStudent />
-            <ListStudent />
+    return (
+        <div>
+                <h1>This is Home Page</h1>
         </div>
-    )
+    );
 }

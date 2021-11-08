@@ -1,7 +1,8 @@
 import {useContext, useEffect, useState} from "react";
 import Image from 'next/image';
 import d_logo from "../public/delete.jpeg";
-import {GlobalContext} from "./GlobalContext/GlobalContextProvider";
+import {GlobalContext} from "../page-components/GlobalContext/GlobalContextProvider";
+
 
 export default function ListStudent(){
 
@@ -18,10 +19,10 @@ export default function ListStudent(){
     const [data,setData] = useState(init_data);
 
     const [updated,setUpdated] = useContext(GlobalContext);
-
+    const server_url = process.env.NEXT_PUBLIC_BACKEND_SERVER;
 
     const deleteHandler = (id)=>{
-        fetch(`http://localhost:8080/delete/${id}`,{
+        fetch(server_url+`/delete/${id}`,{
             method: "DELETE",
         }).then(() => {
             setUpdated(true);
@@ -31,11 +32,11 @@ export default function ListStudent(){
 
 
     useEffect(()=>{
-        fetch(`http://localhost:8080/getStudents`)
+        fetch(server_url+`/getStudents`)
             .then(res => res.json())
-            .then((data) => setData(data));
+                .then((data) => setData(data));
 
-    },[updated])
+    },[server_url, updated])
 
     return(
         <>
@@ -48,7 +49,7 @@ export default function ListStudent(){
                         <th className="font-semibold text-sm uppercase px-6 py-4">Name</th>
                         <th className="font-semibold text-sm uppercase px-6 py-4 text-center"> Email</th>
                         <th className="font-semibold text-sm uppercase px-6 py-4 text-center">Remove</th>
-                        <th className="font-semibold text-sm uppercase px-6 py-4"></th>
+                        <th className="font-semibold text-sm uppercase px-6 py-4"/>
                     </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
