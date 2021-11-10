@@ -2,8 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import Image from 'next/image';
 import d_logo from "../public/delete.jpeg";
 import {GlobalContext} from "../page-components/GlobalContext/GlobalContextProvider";
-
-
 export default function ListStudent(){
 
     const init_data = [
