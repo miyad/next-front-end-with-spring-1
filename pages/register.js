@@ -7,15 +7,16 @@ export default function Register(){
     const [name,setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const server_url = process.env.NEXT_PUBLIC_BACKEND_SERVER;
 
     function registerHandler(e){
         e.preventDefault();
         console.log("registerHandler");
-        fetch('http://localhost:3000/api/register',{
+        fetch(`${server_url}/newPerson`,{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                name: name,
+                fullName: name,
                 email: email,
                 password: password
             })
@@ -26,7 +27,7 @@ export default function Register(){
                     alert(data.error);
                 }
                 else{
-                    alert(data.message);
+                   // alert(data.message);
                     Router.push('/');
                 }
             })

@@ -29,6 +29,8 @@ export const getStaticProps = async (context) =>{
 }
 
 const Home = ({person}) => {
+    // this is profile page of that person, we have all the info in person param, we can use it through
+    // all the components that we have in this page
     const router = useRouter();
     console.log(router.query.id);
    // console.log(router.query)
