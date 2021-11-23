@@ -6,23 +6,26 @@ import {RouteGuard} from "../page-components/authentication/RouterGuard";
 
 import {Router, useRouter} from "next/router";
 import {useEffect, useState} from "react";
+import Nav from "../page-components/Nav";
 
 export default function Home() {
 
     const [email,setEmail] = useState();
+    const [changed, setChanged] = useState(false);
     const router = useRouter();
     useEffect(() => {
+        console.log("use effect executes");
         const loggedIn = localStorage.getItem('isLoggedIn');
-        console.log(loggedIn);
-        if(!loggedIn){
+
+        if(loggedIn=== "false"){
             router.push('/login');
         }
-    },[]);
+        setEmail(localStorage.getItem('email'));
+    },[changed]);
 
     return (
         <div>
-                <h1>This is Home Page</h1>
-                <h1>your email is {email}</h1>
+            <Nav setChanged={setChanged}/>
         </div>
     );
 }
